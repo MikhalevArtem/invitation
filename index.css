@@ -1,0 +1,241 @@
+:root {
+  --primary: #fff;
+  --bg-color: #A6E6DB;
+  --bg-envelope-color: #ecec79;
+  --envelope-tab: #F5F5B8;
+  --envelope-cover: #f2f2a6;
+  --envelope-bottom: #efef8f;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --txt-color: #444;
+  --heart-color: rgb(252, 8, 231);
+  --letter-bg: #FF7399;
+}
+
+@font-face {
+  font-family: "Pacifico";
+  src: url('/Pacifico-Regular.woff')format('woff');
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  5% {
+    transform: scale(1.1);
+  }
+  10% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes heart-descent {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    transform: translate(0, 22px) scale(1) rotate(45deg);
+  }
+}
+
+@keyframes open-envelope {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+
+@keyframes letter-out {
+  100% {
+    transform: scale(2);
+  }
+}
+
+@keyframes envelope-descent {
+  100% {
+    transform: translate(0, 400px);
+    opacity: 0;
+  }
+}
+
+@keyframes envelope-before-descent {
+  0% {
+    transform: rotateX(180deg);
+  }
+  100% {
+    transform: rotateX(180deg) translate(0, -400px);
+    opacity: 0;
+  }
+}
+
+@keyframes heart-descent-2 {
+  0% {
+    transform: translate(0, 22px) rotate(45deg);
+  }
+  100% {
+    transform: translate(110px, 125px) rotate(0deg);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+}
+
+.container {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 230px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.envelope-back {
+  position: absolute;
+  background-color: var(--bg-envelope-color);
+  box-shadow: 0 0 40px var(--shadow-color);
+  width: 100%;
+  height: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  z-index: 40;
+  border-top: 150px solid var(--envelope-tab);
+  border-right: 150px solid transparent;
+  border-left: 150px solid transparent;
+  transform-origin: top;
+  transition: all 0s 2s;
+}
+
+.envelope::after {
+  content: "";
+  position: absolute;
+  z-index: 30;
+  width: 0px;
+  height: 0px;
+  border-top: 130px solid transparent;
+  border-right: 150px solid var(--envelope-cover);
+  border-bottom: 100px solid var(--envelope-bottom);
+  border-left: 150px solid var(--envelope-cover);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.letter {
+  position: absolute;
+  z-index: 20;
+  background-color: white;
+  width: 54%;
+  height: 80%;
+  bottom: 1px;
+  font-family: 'Pacifico';
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.letter__content {
+  height: 100%;
+  border: 1px solid #6EA900;
+  padding: 0.6rem;
+  border-radius: 4px;
+}
+
+.letter__content h4 {
+  font-weight: 400;
+  font-size: 16px;
+  text-align: end;
+  margin-bottom: 1rem;
+}
+
+.letter__text {
+  margin-bottom: 2rem;
+  text-align: start;
+  font-weight: 400;
+  font-size: 14px;
+  text-align-last: end;
+  margin-right: 20px;
+}
+
+.letter__signature {
+  text-align: start;
+  width: 100%;
+}
+
+.heart {
+  position: absolute;
+  z-index: 50;
+  top: 55%;
+}
+
+.stage-1 .heart {
+  animation: pulse 1.2s infinite;
+}
+
+.stage-2 .heart {
+  transform-origin: 100% 100%;
+  animation: heart-descent 1s;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+}
+
+.stage-2.envelope::before {
+  animation: open-envelope 2s ease-in-out 1.1s 1 normal running forwards;
+  z-index: 10;
+  border-top: 150px solid var(--bg-envelope-color);
+}
+
+.stage-2 .letter {
+  animation: letter-out 1.5s ease-in-out forwards 3.5s;
+  box-shadow: 0 0 40px var(--shadow-color);
+}
+
+.stage-3 .envelope-back {
+  animation: envelope-descent 1.5s ease-in forwards;
+}
+
+.stage-3.envelope::before {
+  animation: envelope-before-descent 1.5s ease-in forwards;
+}
+
+.stage-3.envelope::after {
+  animation: envelope-descent 1.5s ease-in forwards;
+}
+
+.stage-3 .heart {
+  animation: heart-descent-2 2s ease-in-out forwards;
+}
