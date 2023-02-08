@@ -5,7 +5,7 @@
   --envelope-tab: #f5f5b8;
   --envelope-cover: #f2f2a6;
   --envelope-bottom: #efef8f;
-  --shadow-color: rgba(0, 0, 0, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.35);
   --txt-color: #444;
   --heart-color: rgb(252, 8, 231);
   --letter-bg: #ff7399;
@@ -78,7 +78,7 @@
     transform: translate(0, 22px) rotate(45deg);
   }
   100% {
-    transform: translate(110px, 135px) rotate(0deg);
+    transform: translate(110px, 130px) rotate(0deg);
   }
 }
 
@@ -161,6 +161,7 @@ body {
   font-family: "Pacifico", cursive;
   padding: 6px;
   border-radius: 6px;
+  transition: all 0.5s 3s;
 }
 
 .letter__content {
