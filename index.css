@@ -161,7 +161,7 @@ body {
   font-family: "Pacifico", cursive;
   padding: 6px;
   border-radius: 6px;
-  transition: all 0.5s 3s;
+  transition: all 0.5s;
 }
 
 .letter__content {
@@ -217,7 +217,6 @@ body {
 
 .stage-2 .letter {
   animation: letter-out 1.5s ease-in-out forwards 3.5s;
-  box-shadow: 0 0 40px var(--shadow-color);
 }
 
 .stage-3 .envelope-back {
@@ -234,4 +233,8 @@ body {
 
 .stage-3 .heart {
   animation: heart-descent-2 2s ease-in-out forwards;
+}
+
+.stage-3 .letter {
+  box-shadow: 0 0 40px var(--shadow-color);
 }
